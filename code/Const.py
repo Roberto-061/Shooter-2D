@@ -20,9 +20,6 @@ MENU_OPTION = ('NEW GAME',
                'SCORE',
                'EXIT')
 
-
-
-
 # W
-WIN_WIDTH = 1920
-WIN_HEIGHT = 1080
+WIN_WIDTH = 800
+WIN_HEIGHT = 600

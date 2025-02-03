@@ -2,7 +2,7 @@ import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import WIN_WIDTH, MENU_OPTION, COLOR_WHITE, COLOR_ORANGE, COLOR_YELLOW
+from code.Const import WIN_WIDTH, MENU_OPTION, COLOR_WHITE, COLOR_ORANGE, COLOR_YELLOW, WIN_HEIGHT
 
 
 class Menu:
@@ -10,6 +10,7 @@ class Menu:
     def __init__(self, window):
         self.window = window
         self.surf = pygame.image.load('./assets/war4.png')
+        self.surf = pygame.transform.scale(self.surf, (WIN_WIDTH, WIN_HEIGHT))
         self.rect = self.surf.get_rect(left=0, top=0)
 
     def run(self, ):
