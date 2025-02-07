@@ -12,11 +12,11 @@ ENTITY_SPEED = {'Level1bg0': 0,
                 'Level1bg5': 5,
                 'Level1bg6': 6,
                 'Level1bg7': 7,
+                'Player' : 3
 }
 
 # M
 MENU_OPTION = ('NEW GAME',
-               'NEW GAME 2P - COOPERATIVE',
                'SCORE',
                'EXIT')
 
