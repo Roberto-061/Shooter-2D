@@ -12,8 +12,14 @@ ENTITY_SPEED = {'Level1bg0': 0,
                 'Level1bg5': 5,
                 'Level1bg6': 6,
                 'Level1bg7': 7,
-                'Player' : 3
+                'WalkPlayer' : 0.5,
+                'Enemy1' : 2,
+                'Enemy2' : 1,
+                'Enemy3' : 3
 }
+
+# F
+
 
 # M
 MENU_OPTION = ('NEW GAME',
