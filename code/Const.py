@@ -12,7 +12,7 @@ ENTITY_SPEED = {'Level1bg0': 0,
                 'Level1bg5': 5,
                 'Level1bg6': 6,
                 'Level1bg7': 7,
-                'WalkPlayer' : 0.5,
+                'WalkPlayer' : 1,
                 'Enemy1' : 2,
                 'Enemy2' : 1,
                 'Enemy3' : 3

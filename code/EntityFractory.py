@@ -16,7 +16,7 @@ class EntityFactory:
                     list_bg.append(Background(f'Level1bg{i}', (WIN_WIDTH, 0)))
                 return list_bg
             case 'WalkPlayer':
-                return Player('WalkPlayer',(50,0))
-            case 'Enemy1' :
-                return Enemy('Enemy1',(0,0))
+                return Player('WalkPlayer',(0,0))
+            case 'PlayerAttack' :
+                return Player('PlayerAttack',(0,0))
 
