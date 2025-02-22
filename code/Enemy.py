@@ -16,7 +16,7 @@ class Enemy(Entity):
 
         # Definir os quadros da animação de caminhada dos inimigos
         self.walk_frames = []
-        for i in range(6):  # Número de quadros de caminhada
+        for i in range(9):  # Número de quadros de caminhada
             walk_frame = self.walk_spritesheet.subsurface(i * self.walk_frame_width, 0, self.walk_frame_width, self.walk_frame_height)
             walk_frame = pygame.transform.scale(walk_frame, (200, 200))  # Redimensionamento
             self.walk_frames.append(walk_frame)
