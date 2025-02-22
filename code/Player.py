@@ -18,19 +18,20 @@ class Player(Entity):
         # Carregar as spritesheets separadas para caminhar, atacar e jogar granada
         self.walk_spritesheet = pygame.image.load(f'./assets/WalkPlayer.png').convert_alpha()
         self.attack_spritesheet = pygame.image.load(f'./assets/PlayerAttack.png').convert_alpha()
-        self.grenade_spritesheet = pygame.image.load(f'./assets/Grenade.png').convert_alpha()
 
         # Definir os quadros da animação de caminhada
         self.walk_frames = []
         for i in range(7):  # Número de quadros de caminhada
-            walk_frame = self.walk_spritesheet.subsurface(i * self.walk_frame_width, 0, self.walk_frame_width, self.walk_frame_height)
+            walk_frame = self.walk_spritesheet.subsurface(i * self.walk_frame_width, 0, self.walk_frame_width,
+                                                          self.walk_frame_height)
             walk_frame = pygame.transform.scale(walk_frame, (200, 200))  # Redimensionamento apenas aqui
             self.walk_frames.append(walk_frame)
 
         # Definir os quadros da animação de ataque
         self.attack_frames = []
         for i in range(4):  # Número de quadros de ataque
-            attack_frame = self.attack_spritesheet.subsurface(i * self.attack_frame_width, 0, self.attack_frame_width, self.attack_frame_height)
+            attack_frame = self.attack_spritesheet.subsurface(i * self.attack_frame_width, 0, self.attack_frame_width,
+                                                              self.attack_frame_height)
             attack_frame = pygame.transform.scale(attack_frame, (200, 200))  # Redimensionamento apenas aqui
             self.attack_frames.append(attack_frame)
 
@@ -46,9 +47,9 @@ class Player(Entity):
         self.current_frame = 0
         self.is_walking = False
         self.is_attacking = False
-        self.is_throwing_grenade = False  # Controle se está lançando granada
-        self.grenade_counter = 0  # Contador de quadros da granada
         self.attack_counter = 0
+
+        self.attack_rect = pygame.Rect(0, 0, 0, 0)  # Inicializar o retângulo de ataque com tamanho zero
 
     def move(self):
         """Controlar o movimento do jogador e as animações"""
@@ -97,6 +98,10 @@ class Player(Entity):
             self.attack_counter = 0
             self.is_attacking = False  # Termina a animação de ataque após o último quadro
 
+            # Após o ataque, desativa o retângulo de ataque (reseta o tamanho)
+            self.attack_rect.width = 0
+            self.attack_rect.height = 0
+
         self.surf = self.attack_frames[self.attack_counter // 5]  # Atualiza a imagem do player para o quadro de ataque
 
     def start_attack(self):
@@ -105,6 +110,11 @@ class Player(Entity):
             self.is_attacking = True
             self.attack_counter = 0  # Reinicia o contador de animação de ataque
             self.current_frame = 0  # Reinicia a animação de caminhada, caso tenha parado para atacar
+
+            # Atualizar o retângulo de ataque para a posição do jogador
+            self.attack_rect.center = self.rect.centerx + 100, self.rect.centery  # Ajuste o valor conforme necessário
+            self.attack_rect.width = 300  # Defina o tamanho adequado do retângulo de ataque
+            self.attack_rect.height = 50  # Defina a altura adequada para o ataque
 
             # Tocar o efeito sonoro de ataque
             self.attack_sound.play()

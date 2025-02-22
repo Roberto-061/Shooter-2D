@@ -23,8 +23,7 @@ ENTITY_SPEED = {'Level1bg0': 0,
 
 # M
 MENU_OPTION = ('NEW GAME',
-               'SCORE',
-               'EXIT')
+                'EXIT')
 
 # W
 WIN_WIDTH = 800

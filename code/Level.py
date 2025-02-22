@@ -9,6 +9,7 @@ from code.Const import COLOR_WHITE, WIN_HEIGHT, WIN_WIDTH
 from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFractory import EntityFactory
+from code.Player import Player
 
 
 class Level:
@@ -40,8 +41,6 @@ class Level:
         self.max_zumbis = 50
         self.zumbi_spawn_limit = 5  # Limite de zumbis sendo spawnados de cada vez
 
-        self.timeout = 20000  # 20 segundos
-
     def run(self):
         pygame.mixer_music.load('./assets/level1music.mp3')
         pygame.mixer_music.play(-1)
@@ -56,6 +55,13 @@ class Level:
                     [e for e in self.entity_list if isinstance(e, Enemy)]) < self.max_zumbis:
                 self.spawn_zumbis()
 
+            # Detectar colisão entre o ataque do jogador e os inimigos
+            player = [e for e in self.entity_list if isinstance(e, Player)][0]  # Encontrar o jogador
+            for enemy in [e for e in self.entity_list if isinstance(e, Enemy)]:
+                if player.attack_rect.colliderect(enemy.rect):  # Verifica se o retângulo de ataque do jogador colidiu com o inimigo
+                    self.handle_enemy_hit(enemy)  # Chama a função para remover o inimigo
+
+            # Mover e desenhar as entidades
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
@@ -65,10 +71,18 @@ class Level:
                     pygame.quit()
                     sys.exit()
 
-            self.level_text(16, f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
             self.level_text(16, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, 17))
             self.level_text(16, f'entidades: {len(self.entity_list)}', COLOR_WHITE, (10, 27))
             pygame.display.flip()
+
+    def handle_enemy_hit(self, enemy):
+        """Função para lidar quando o inimigo é atingido pelo ataque do jogador."""
+        print("Inimigo atingido!")
+
+        # Remover o inimigo da lista (matar o zumbi)
+        self.entity_list.remove(enemy)
+
+        pygame.mixer.Sound('./assets/EnemyDeathSound.wav').play()
 
     def spawn_zumbis(self):
         """Função para spawnar múltiplos zumbis"""
